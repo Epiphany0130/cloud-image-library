@@ -1,0 +1,40 @@
+server:
+  port: 8123 # 端口号
+  servlet:
+    context-path: /api # 上下文路径
+  profiles:
+    active: local # 激活的配置文件
+spring:
+  application:
+    name: cloud-image-library # 项目名称
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver # 数据库驱动
+    url: jdbc:mysql://localhost:3306/yu_picture # 数据库地址
+    username: ${DB_USERNAME} # 数据库用户名
+    password: ${DB_PASSWORD} # 数据库密码
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false # 下划线转驼峰命名
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # SQL日志打印 仅在开发环境使用
+  global-config:
+    db-config:
+      logic-delete-field: isDelete # 逻辑删除字段
+      logic-delete-value: 1 # 逻辑删除值
+      logic-not-delete-value: 0 # 非逻辑删除值
+# springdoc-openapi 项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html # swagger-ui 访问路径
+    tags-sorter: alpha # 标签排序方式
+    operations-sorter: alpha # 操作排序方式
+  api-docs:
+    path: /v3/api-docs # api-docs 访问路径
+  group-configs:
+    - group: 'default' # 分组名称
+      paths-to-match: '/**' # 需要扫描的路径
+      packages-to-scan: com.gyqstd.cloudimagelibrary.controller # 需要扫描的包
+# knife4j 的增强配置，不需要增强可以不配
+knife4j:
+  enable: true # 是否启用 knife4j
+  setting:
+    language: zh_cn # 界面语言
