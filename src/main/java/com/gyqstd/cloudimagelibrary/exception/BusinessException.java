@@ -1,9 +1,12 @@
 package com.gyqstd.cloudimagelibrary.exception;
 
+import lombok.Data;
+
 /**
  * @author GuYuqi
  * @version 1.0
  */
+@Data
 public class BusinessException extends RuntimeException{
 
     /**
@@ -25,4 +28,5 @@ public class BusinessException extends RuntimeException{
         super(message);
         this.code = errorCode.getCode();
     }
+
 }
