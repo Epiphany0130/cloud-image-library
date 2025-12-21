@@ -6,14 +6,12 @@ import com.gyqstd.cloudimagelibrary.exception.ErrorCode;
 import com.gyqstd.cloudimagelibrary.exception.ThrowUtils;
 import com.gyqstd.cloudimagelibrary.model.dto.user.UserLoginRequest;
 import com.gyqstd.cloudimagelibrary.model.dto.user.UserRegisterRequest;
+import com.gyqstd.cloudimagelibrary.model.entity.User;
 import com.gyqstd.cloudimagelibrary.model.vo.user.LoginUserVO;
 import com.gyqstd.cloudimagelibrary.service.UserService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -49,5 +47,17 @@ public class UserController {
         LoginUserVO loginUserVO = userService.userLogin(userAccount, userPassword, request);
         return ResultUtils.success(loginUserVO);
     }
+
+    /**
+     * 获取当前登录用户
+     * @param request
+     * @return
+     */
+    @GetMapping("/get/login")
+    public BaseResponse<LoginUserVO> getLoginUser(HttpServletRequest request) {
+        User loginUser = userService.getLoginUser(request);
+        return ResultUtils.success(userService.getLoginUserVO(loginUser));
+    }
+
 
 }
