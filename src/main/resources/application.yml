@@ -2,14 +2,14 @@ server:
   port: 8123 # 端口号
   servlet:
     context-path: /api # 上下文路径
+spring:
   profiles:
     active: local # 激活的配置文件
-spring:
   application:
     name: cloud-image-library # 项目名称
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver # 数据库驱动
-    url: jdbc:mysql://localhost:3306/yu_picture # 数据库地址
+    url: jdbc:mysql://localhost:3306/pictures_cloud # 数据库地址
     username: ${DB_USERNAME} # 数据库用户名
     password: ${DB_PASSWORD} # 数据库密码
 mybatis-plus:
