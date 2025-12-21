@@ -4,9 +4,12 @@ import com.gyqstd.cloudimagelibrary.common.BaseResponse;
 import com.gyqstd.cloudimagelibrary.common.ResultUtils;
 import com.gyqstd.cloudimagelibrary.exception.ErrorCode;
 import com.gyqstd.cloudimagelibrary.exception.ThrowUtils;
+import com.gyqstd.cloudimagelibrary.model.dto.user.UserLoginRequest;
 import com.gyqstd.cloudimagelibrary.model.dto.user.UserRegisterRequest;
+import com.gyqstd.cloudimagelibrary.model.vo.user.LoginUserVO;
 import com.gyqstd.cloudimagelibrary.service.UserService;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,4 +34,20 @@ public class UserController {
         long result = userService.userRegister(userAccount, userPassword, checkPassword);
         return ResultUtils.success(result);
     }
+
+    /**
+     * 用户登录
+     * @param userLoginRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/login")
+    public BaseResponse<LoginUserVO> userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
+        ThrowUtils.throwIf(userLoginRequest == null, ErrorCode.PARAMS_ERROR);
+        String userAccount = userLoginRequest.getUserAccount();
+        String userPassword = userLoginRequest.getUserPassword();
+        LoginUserVO loginUserVO = userService.userLogin(userAccount, userPassword, request);
+        return ResultUtils.success(loginUserVO);
+    }
+
 }

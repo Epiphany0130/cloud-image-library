@@ -2,6 +2,8 @@ package com.gyqstd.cloudimagelibrary.service;
 
 import com.gyqstd.cloudimagelibrary.model.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gyqstd.cloudimagelibrary.model.vo.user.LoginUserVO;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
 * @author guyuqi
@@ -27,4 +29,22 @@ public interface UserService extends IService<User> {
      * @return 加密后的密码
      */
     public String getEncryptPassword(String userPassword);
+
+
+    /**
+     * 用户登录
+     *
+     * @param userAccount  用户账户
+     * @param userPassword 用户密码
+     * @param request
+     * @return 脱敏后的用户信息
+     */
+    LoginUserVO userLogin(String userAccount, String userPassword, HttpServletRequest request);
+
+    /**
+     * 获得脱敏后的登录用户信息
+     * @param user
+     * @return
+     */
+    LoginUserVO getLoginUserVO(User user);
 }
