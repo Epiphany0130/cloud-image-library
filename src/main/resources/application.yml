@@ -38,3 +38,12 @@ knife4j:
   enable: true # 是否启用 knife4j
   setting:
     language: zh_cn # 界面语言
+# 对象存储配置（需要从腾讯云获取）
+cos:
+  client:
+    host: ${COS_HOST} # COS 服务地址
+    secretId: ${COS_SECRET_ID} # COS SecretId
+    secretKey: ${COS_SECRET_KEY} # COS SecretKey
+    region: ${COS_REGION} # COS 区域
+    bucket: ${COS_BUCKET} # COS 存储桶名称
+
